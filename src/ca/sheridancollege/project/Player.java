@@ -11,6 +11,7 @@ package ca.sheridancollege.project;
  * @author dancye
  * @author Paul Bonenfant Jan 2020
  * @author Megha Patel
+ * @author Darren Scarfo Aug 2021
  */
 public abstract class Player {
 
@@ -45,6 +46,6 @@ public abstract class Player {
      * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
      * with logic to play your game.
      */
-    public abstract void play();
+    //public abstract void play();
 
 }
