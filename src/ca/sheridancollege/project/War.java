@@ -1,10 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
 
+
+//********************************************
+//     This class is the heart of the program
+//********************************************
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,12 +20,15 @@ public class War extends Game {
     }
 
 
+    //play method that consist the logic and the structure of the game.
     public void play() {
         System.out.println("\n******************************************************");
         System.out.println("           Welcome to " + super.getName());
         System.out.println("******************************************************\n");
         boolean isTwoPlayer = false;
 
+
+        //Ask if there are two players.
         while(true) {
             System.out.print("Is there two players? (y/n): ");
             char input = this.scanner.next().toLowerCase().charAt(0);
@@ -40,57 +45,76 @@ public class War extends Game {
             System.out.println("Invalid input please try again.");
         }
 
+        //Deck Creation
         Deck playingDeck = new Deck();
         playingDeck.createFullDeck();
         playingDeck.shuffle();
-        String player2Name = "Computer";
+
+        //Player1 and Player 2 Creation
+        String player2Name = "Computer";//This is the ai name. If there is only one player 2nd Player name will be this.
+
         System.out.println("\n******************************************************");
         System.out.print("Enter player 1 name: ");
         String player1Name = this.scanner.nextLine();
+
+        //if 2 players ask the 2nd players name.
         if (isTwoPlayer) {
             System.out.print("Enter player 2 name: ");
             player2Name = this.scanner.nextLine();
         }
-
         System.out.println("******************************************************\n");
+
+
         WarPlayer player1 = new WarPlayer(player1Name);
         WarPlayer player2 = new WarPlayer(player2Name);
+
+        //This arraylist is for the currently drawn cards by the user.
         ArrayList<StandardCard> cardsCurrentlyDrawn = new ArrayList();
 
+        //If the deck size is zero game end.
+        //In other words if there are no more cards to be drawn.
         for(int round = 1; playingDeck.getCards().size() != 0; ++round) {
-            System.out.println("\n-------------------------------------------------------");
-            System.out.println("\n                     Round " + round + "! \n");
-            System.out.println("\n-------------------------------------------------------");
-            System.out.println("\n******************************************************");
-            System.out.println("       Press [enter] to draw a card for " + player1.getName());
-            System.out.println("******************************************************");
-            this.scanner.nextLine();
-            player1.draw(playingDeck);
-            PrintStream var10000 = System.out;
-            String var10001 = player1.getName();
-            var10000.println(var10001 + "'s card is: " + player1.getDrawnCard());
-            cardsCurrentlyDrawn.add(player1.getDrawnCard());
-            System.out.println("\n******************************************************");
-            System.out.println("        Press [enter] to draw a card for " + player2.getName());
-            System.out.println("*******************************************************");
-            this.scanner.nextLine();
-            player2.draw(playingDeck);
-            var10000 = System.out;
-            var10001 = player2.getName();
-            var10000.println(var10001 + "'s card is: " + player2.getDrawnCard());
-            cardsCurrentlyDrawn.add(player2.getDrawnCard());
-            System.out.println("\n******************************************************");
-            System.out.println("             Press [enter] to compare");
-            System.out.println("******************************************************\n");
-            this.scanner.nextLine();
+
+            //Player 1 turn
+            playerTurn(player1, round, playingDeck, cardsCurrentlyDrawn);
+            //Player 2 turn
+            playerTurn(player2, round, playingDeck, cardsCurrentlyDrawn);
+
+
             WarPlayer roundWinner = this.getRoundWinner(player1, player2);
             this.declareRoundWinner(roundWinner, cardsCurrentlyDrawn);
             this.showCardsWon(player1, player2);
         }
 
-        this.declareWinner(player1, player2);
+        this.declareWinner(player1, player2);//Declare winner
     }
 
+    //This method consist the flow of each players turn
+    public void playerTurn(WarPlayer player,int round,Deck deck, ArrayList<StandardCard> cardsCurrentlyDrawn){
+
+        //Show the round
+        System.out.println("\n-------------------------------------------------------");
+        System.out.println("\n                     Round " + round + "! \n");
+        System.out.println("\n-------------------------------------------------------");
+
+        //Show the player who should draw
+        System.out.println("\n******************************************************");
+        System.out.println("       Press [enter] to draw a card for " + player.getName());
+        System.out.println("******************************************************");
+        this.scanner.nextLine();
+
+        //Draw
+        player.draw(deck);
+
+        //Print out the drawn card
+        System.out.println(player.getName() + "'s card is: " + player.getDrawnCard());
+
+        //Add the card currently drawn by p1 to the currentlyDrawn arraylist
+        cardsCurrentlyDrawn.add(player.getDrawnCard());
+
+
+    }
+    //Returns the player who won the round
     public WarPlayer getRoundWinner(WarPlayer p1, WarPlayer p2) {
         WarPlayer playerRoundWinner = p2;
         System.out.println("-------------------------------------------------------");
@@ -110,7 +134,7 @@ public class War extends Game {
         System.out.println("-------------------------------------------------------");
         return playerRoundWinner;
     }
-
+    //Convert the enum value to int
     public int cardValueToInt(StandardCard card) {
         int value = 0;
         switch(card.getValue()) {
@@ -156,7 +180,7 @@ public class War extends Game {
 
         return value;
     }
-
+    //Print out the ROUND winner
     public void declareRoundWinner(WarPlayer roundWinner, ArrayList<StandardCard> cardsCurrentlyDrawn) {
         System.out.println("\n******************************************************");
         System.out.println("              " + roundWinner.getName() + "  won for this round! ");
@@ -166,13 +190,13 @@ public class War extends Game {
         cardsCurrentlyDrawn.clear();
         this.scanner.nextLine();
     }
-
+    //Shows how many cards user won.
     public void showCardsWon(WarPlayer p1, WarPlayer p2) {
         System.out.println("******************************************************");
         System.out.println("               ~ Player cards won ~");
         PrintStream var10000 = System.out;
         String var10001 = p1.getName();
-        var10000.println("             n" + var10001 + " [" + p1.getCardsWon().size() + "] | " + p2.getName() + " [" + p2.getCardsWon().size() + "] ");
+        var10000.println("             " + var10001 + " [" + p1.getCardsWon().size() + "] | " + p2.getName() + " [" + p2.getCardsWon().size() + "] ");
         if (p1.getCardsWon().size() > p2.getCardsWon().size()) {
             System.out.println("              ~ " + p1.getName() + " is winning!~ ");
         } else {
@@ -183,7 +207,7 @@ public class War extends Game {
         System.out.println("******************************************************\n");
         this.scanner.nextLine();
     }
-
+    //Declare the overall winner of the game
     public void declareWinner(WarPlayer p1, WarPlayer p2) {
         System.out.println("******************************************************\n");
         System.out.println("________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n___¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n_¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n¶¶¶¶______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_______¶¶¶¶ \n¶¶¶_______¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶________¶¶¶ \n¶¶¶____¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶____¶¶¶¶ \n_¶¶¶___¶¶¶_¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_¶¶¶____¶¶¶ \n___¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶_¶¶¶¶¶ \n______¶¶¶¶¶¶__¶¶¶¶¶¶¶¶¶¶¶¶¶¶___¶¶¶¶¶¶ \n_______________¶¶¶¶¶¶¶¶¶¶¶¶ \n_________________¶¶¶¶¶¶¶¶ \n___________________¶¶¶¶ \n___________________¶¶¶¶ \n_______________¶¶¶¶¶¶¶¶¶¶¶¶ \n____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n____________¶¶¶____________¶¶¶ \n____________¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶ \n");

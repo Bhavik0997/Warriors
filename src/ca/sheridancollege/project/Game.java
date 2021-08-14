@@ -1,12 +1,14 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
- */
 package ca.sheridancollege.project;
+/**
+ * @ author Neil-Bryan Caoile
+ */
 
 import java.util.ArrayList;
 
+
+//********************************************
+//             Abstract class
+//********************************************
 public abstract class Game {
     private final String name;
     private ArrayList<Player> players;
@@ -19,14 +21,12 @@ public abstract class Game {
     public String getName() {
         return this.name;
     }
-
     public ArrayList<Player> getPlayers() {
         return this.players;
     }
-
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
-
+    //This method consist the game.
     public abstract void play();
 }

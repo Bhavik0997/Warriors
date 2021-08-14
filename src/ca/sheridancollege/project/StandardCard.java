@@ -1,10 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
-
+//********************************************
+//     This class imitates Standard cards
+//       Contains enum Suits and Values
+//********************************************
 public class StandardCard extends Card {
     private final Value value;
     private final Suit suit;
@@ -14,14 +15,11 @@ public class StandardCard extends Card {
         this.value = value;
     }
 
+    //Print out the card's information- value and suit
     public String toString() {
         return this.suit + ":" + this.value;
     }
-
-    public Suit getSuit() {
-        return this.suit;
-    }
-
+    //Get the value of the card
     public Value getValue() {
         return this.value;
     }

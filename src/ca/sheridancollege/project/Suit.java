@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
-
+//********************************************************
+// Enum that consist of the suits of a standard card.
+//********************************************************
 public enum Suit {
     CLUB,
     DIAMOND,
     SPADE,
-    HEART;
-
-    private Suit() {
-    }
+    HEART
 }

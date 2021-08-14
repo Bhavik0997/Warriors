@@ -1,10 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
-
+//********************************************************
+// Enum that consist of the values of a standard card.
+//               Represented by words.
+//********************************************************
 public enum Value {
     TWO,
     THREE,
@@ -18,9 +19,7 @@ public enum Value {
     JACK,
     KING,
     QUEEN,
-    ACE;
+    ACE
 
-    private Value() {
-    }
 }
 

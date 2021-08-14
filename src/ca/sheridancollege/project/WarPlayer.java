@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
 
@@ -37,19 +35,21 @@ public class WarPlayer extends Player {
         this.drawnCard = drawnCard;
     }
 
+    //This method allows a player to draw from the deck
     public void draw(Deck deck) {
         this.drawnCard = (StandardCard)deck.getCards().get(0);
         deck.getCards().remove(0);
     }
 
+    //A method where gets the currently drawn cards of the user.
     public StandardCard getDrawnCard() {
         return this.drawnCard;
     }
 
+    //A method that return an arrayList of StandardCard.
+    //These cards were gained by winning each round.
     public ArrayList<StandardCard> getCardsWon() {
         return this.cardsWon;
     }
 
-    public void play() {
-    }
 }

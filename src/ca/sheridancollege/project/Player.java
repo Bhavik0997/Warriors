@@ -1,26 +1,18 @@
 /**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
+ * @ author Neil-Bryan Caoile
  */
 package ca.sheridancollege.project;
 
-
+//********************************************
+//             Abstract class
+//********************************************
 public abstract class Player {
     private String name;
-
     public Player(String name) {
         this.name = name;
     }
-
     public String getName() {
         return this.name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public abstract void play();
 }
 
