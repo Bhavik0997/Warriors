@@ -31,6 +31,11 @@ public class WarPlayer extends Player {
 
         return cardListOutput.toString();
     }
+    
+    //Just for testing
+    public void setDrawnCard(StandardCard drawnCard){
+        this.drawnCard = drawnCard;
+    }
 
     public void draw(Deck deck) {
         this.drawnCard = (StandardCard)deck.getCards().get(0);
