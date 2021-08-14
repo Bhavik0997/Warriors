@@ -4,14 +4,6 @@
  * and open the template in the editor.
  */
 package ca.sheridancollege.project;
-
-/**
- * 
- * 
- * 
- *
- * @author Darren Scarfo Aug 2021
- */
 public class Main {
     public Main() {
     }

@@ -17,6 +17,7 @@ public class War extends Game {
         this.scanner = new Scanner(System.in);
     }
 
+
     public void play() {
         System.out.println("\n******************************************************");
         System.out.println("           Welcome to " + super.getName());
