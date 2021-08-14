@@ -5,45 +5,46 @@
  */
 package ca.sheridancollege.project;
 
-/**
- *
- * @author Darren Scarfo Aug 2021
- */
 import java.util.ArrayList;
-public class WarPlayer extends Player {
-    
-    private GroupOfCards playingCards;
-    public StandardCard topCard;
-    
-    // 
-    public StandardCard getTopCard() {
-        this.topCard = playingCards.getAndRemoveTopCard();
-        return topCard;
-        //return playingCards.getCards().get(0);
-    }
-    
-    public WarPlayer(String name, GroupOfCards groupOfCards) {
-        super(name);
-        this.playingCards = groupOfCards;
-    }
-    
+import java.util.Iterator;
 
-   // not used 
-    public GroupOfCards playingCards(int i){
-        i = 26;
-        return this.playingCards(i);
+public class WarPlayer extends Player {
+    private final ArrayList<StandardCard> cardsWon = new ArrayList();
+    private StandardCard drawnCard;
+
+    public WarPlayer(String name) {
+        super(name);
     }
-    
-    public int getHandSize() {
-        return playingCards.getSize();
+
+    public ArrayList<StandardCard> getPlayingHand() {
+        return this.cardsWon;
     }
-    
-    public ArrayList<StandardCard> hand() {
-        return playingCards.getCards();
+
+    public String toString() {
+        StringBuilder cardListOutput = new StringBuilder();
+        int i = 0;
+
+        for(Iterator var3 = this.cardsWon.iterator(); var3.hasNext(); ++i) {
+            StandardCard aCard = (StandardCard)var3.next();
+            cardListOutput.append("\n").append(i).append("-").append(aCard.toString());
+        }
+
+        return cardListOutput.toString();
     }
-    
-   
-        
-    
-    
+
+    public void draw(Deck deck) {
+        this.drawnCard = (StandardCard)deck.getCards().get(0);
+        deck.getCards().remove(0);
+    }
+
+    public StandardCard getDrawnCard() {
+        return this.drawnCard;
+    }
+
+    public ArrayList<StandardCard> getCardsWon() {
+        return this.cardsWon;
+    }
+
+    public void play() {
+    }
 }

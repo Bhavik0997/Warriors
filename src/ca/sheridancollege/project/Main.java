@@ -13,14 +13,11 @@ package ca.sheridancollege.project;
  * @author Darren Scarfo Aug 2021
  */
 public class Main {
-    
-    public static void main(String[] args) {
-        
-        // create game object
-        WarGame game = new WarGame("War");
-        
-        // call play method
-        game.play();
+    public Main() {
     }
-    
+
+    public static void main(String[] args) {
+        War warGame = new War();
+        warGame.play();
+    }
 }

@@ -5,26 +5,12 @@
  */
 package ca.sheridancollege.project;
 
-/**
- *
- * @author darre
- */
 public enum Suit {
-    
-    SPADES ("Spades"),
-    HEARTS ("Hearts"),
-    CLUBS ("Clubs"),
-    DIAMONDS ("Diamonds");
-    
-    private String displayName;
-    
-    public String getDisplayName() {
-        return displayName;
+    CLUB,
+    DIAMOND,
+    SPADE,
+    HEART;
+
+    private Suit() {
     }
-    
-    private Suit(String suit) {
-        displayName = suit;
-    }
-    
-    
 }
