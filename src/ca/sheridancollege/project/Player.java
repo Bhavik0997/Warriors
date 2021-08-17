@@ -7,12 +7,10 @@ package ca.sheridancollege.project;
 //             Abstract class
 //********************************************
 public abstract class Player {
-    private final String name;
+    final String name;
     public Player(String name) {
         this.name = name;
     }
-    public String getName() {
-        return this.name;
-    }
+    public abstract String getName();
 }
 

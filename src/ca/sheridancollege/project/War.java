@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class War extends Game {
+
+
     Scanner scanner;
 
     public War() {
@@ -23,7 +25,7 @@ public class War extends Game {
     //play method that consist the logic and the structure of the game.
     public void play() {
         System.out.println("\n******************************************************");
-        System.out.println("           Welcome to " + super.getName());
+        System.out.println("           Welcome to " + this.getName());
         System.out.println("******************************************************\n");
         boolean isTwoPlayer = false;
 
@@ -242,6 +244,11 @@ public class War extends Game {
         }
 
         System.out.println("\n******************************************************");
+    }
+
+    @Override
+    public String getName() {
+       return name;
     }
 }
 

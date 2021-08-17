@@ -49,4 +49,8 @@ public class WarPlayer extends Player {
         return this.cardsWon;
     }
 
+    @Override
+    public String getName() {
+        return name;
+    }
 }
