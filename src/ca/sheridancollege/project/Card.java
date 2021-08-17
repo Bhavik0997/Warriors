@@ -8,8 +8,8 @@ package ca.sheridancollege.project;
 //********************************************
 
 public abstract class Card {
-    private Suit suit;
-    private Value value;
+     Suit suit;
+     Value value;
 
     public Card() {
     }

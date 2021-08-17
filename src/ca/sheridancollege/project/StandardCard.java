@@ -7,12 +7,10 @@ package ca.sheridancollege.project;
 //       Contains enum Suits and Values
 //********************************************
 public class StandardCard extends Card {
-    private final Value value;
-    private final Suit suit;
 
     public StandardCard(Suit suit, Value value) {
-        this.suit = suit;
-        this.value = value;
+        super.suit = suit;
+        super.value = value;
     }
 
     //Print out the card's information- value and suit

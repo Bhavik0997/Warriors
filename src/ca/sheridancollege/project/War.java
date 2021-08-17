@@ -69,19 +69,48 @@ public class War extends Game {
         WarPlayer player2 = new WarPlayer(player2Name);
 
         //This arraylist is for the currently drawn cards by the user.
-        ArrayList<StandardCard> cardsCurrentlyDrawn = new ArrayList();
+        ArrayList<StandardCard> cardsCurrentlyDrawn = new ArrayList<>();
 
         //If the deck size is zero game end.
         //In other words if there are no more cards to be drawn.
         for(int round = 1; playingDeck.getCards().size() != 0; ++round) {
+            //Show the round
+            System.out.println("\n-------------------------------------------------------");
+            System.out.println("\n                     Round " + round + "! \n");
+            System.out.println("\n-------------------------------------------------------");
+
 
             //Player 1 turn
-            playerTurn(player1, round, playingDeck, cardsCurrentlyDrawn);
+            playerTurn(player1, playingDeck, cardsCurrentlyDrawn);
             //Player 2 turn
-            playerTurn(player2, round, playingDeck, cardsCurrentlyDrawn);
+            playerTurn(player2, playingDeck, cardsCurrentlyDrawn);
+
 
 
             WarPlayer roundWinner = this.getRoundWinner(player1, player2);
+
+
+            //If round winner is null then it is war.
+            //Null happen when the value of both players currently drawn cards are equal.
+            //When it is war, player have to set aside the currently drawn cards and each players have to draw another card again.
+            //Cards drawn will be stored in an arraylist of Standard card called cardsCurrentlyDrawn.
+            //If the the value of the current drawn cards is still equal when it is war, then they have to draw cards again until somebody win.
+            //Who ever wins the round will get all the cards, the the player who won in this war round will receive more than 2 cards- this depends on how many times war happen.
+            while (roundWinner == null){
+                System.out.println("\n*************** !!!!ITS WAR!!!! **********************");
+                System.out.println("*************** !!!!ITS WAR!!!! **********************");
+                System.out.println("*************** !!!!ITS WAR!!!! **********************");
+
+                System.out.println("            [Number of drawn cards = " + cardsCurrentlyDrawn.size() + "] " );
+
+                playerTurn(player1, playingDeck, cardsCurrentlyDrawn);
+                //Player 2 turn
+                playerTurn(player2, playingDeck, cardsCurrentlyDrawn);
+
+
+                roundWinner = this.getRoundWinner(player1,player2);
+            }
+
             this.declareRoundWinner(roundWinner, cardsCurrentlyDrawn);
             this.showCardsWon(player1, player2);
         }
@@ -90,12 +119,7 @@ public class War extends Game {
     }
 
     //This method consist the flow of each players turn
-    public void playerTurn(WarPlayer player,int round,Deck deck, ArrayList<StandardCard> cardsCurrentlyDrawn){
-
-        //Show the round
-        System.out.println("\n-------------------------------------------------------");
-        System.out.println("\n                     Round " + round + "! \n");
-        System.out.println("\n-------------------------------------------------------");
+    public void playerTurn(WarPlayer player,Deck deck, ArrayList<StandardCard> cardsCurrentlyDrawn){
 
         //Show the player who should draw
         System.out.println("\n******************************************************");
@@ -118,17 +142,15 @@ public class War extends Game {
     public WarPlayer getRoundWinner(WarPlayer p1, WarPlayer p2) {
         WarPlayer playerRoundWinner = p2;
         System.out.println("-------------------------------------------------------");
-        PrintStream var10000;
-        StandardCard var10001;
         if (this.cardValueToInt(p1.getDrawnCard()) > this.cardValueToInt(p2.getDrawnCard())) {
             playerRoundWinner = p1;
-            var10000 = System.out;
-            var10001 = p1.getDrawnCard();
-            var10000.println("              " + var10001 + " > " + p2.getDrawnCard());
-        } else {
-            var10000 = System.out;
-            var10001 = p2.getDrawnCard();
-            var10000.println("              " + var10001 + " > " + p1.getDrawnCard());
+            System.out.println("              " + p1.getDrawnCard() + " > " + p2.getDrawnCard());
+        }else if(this.cardValueToInt(p1.getDrawnCard()) == this.cardValueToInt(p2.getDrawnCard())){
+            playerRoundWinner = null;
+            System.out.println("              " + p1.getDrawnCard() + " = " + p2.getDrawnCard());
+        }
+        else {
+            System.out.println("              " + p2.getDrawnCard() + " > " + p1.getDrawnCard());
         }
 
         System.out.println("-------------------------------------------------------");
